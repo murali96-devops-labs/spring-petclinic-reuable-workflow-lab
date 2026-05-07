@@ -7,9 +7,7 @@ on:
                 required: false
                 type: string
                 default: '21'
-    push:
-     branches:
-      - main
+
 
 permissions:
   checks: write        # ← needed to create check runs
