@@ -2,9 +2,15 @@
 name: pull_req 
 on:
     workflow_dispatch:
+
+permissions:              # ← must have this
+  checks: write
+  contents: read
+  pull-requests: write
+  security-events: write
 jobs:
     build:
         uses: murali96-devops-labs/reusable-workflow-use--it/.github/workflows/demo1.yml@main
         with:
-            java-version: '17'
+            java_version: '17'
 
