@@ -1,7 +1,6 @@
 ---
 name: pull_req 
 on:
-    workflow_dispatch:
     workflow_call:
         inputs:
             java_version:
