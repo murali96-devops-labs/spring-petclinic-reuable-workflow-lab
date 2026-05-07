@@ -1,40 +1,10 @@
 ---
 name: pull_req 
 on:
-    workflow_call:
-        inputs:
-            java_version:
-                required: false
-                type: string
-                default: '21'
-
-
-permissions:
-  checks: write        # ← needed to create check runs
-  contents: read       # ← needed to read the repo
-  pull-requests: write # ← needed to post PR comments
-  security-events: write # ← this is what CodeQL needs
+    workflow_dispatch:
 jobs:
-    maven-build-job:
-        runs-on: ubuntu-latest
-        steps:
-            - name: get the code
-              uses: actions/checkout@v4
-            - name: steup java
-              uses: actions/setup-java@v4
-              with:
-                java-version: ${{inputs.java_version}}
-                distribution: 'temurin'
-            - name: initilize codeql
-              uses: github/codeql-action/init@v4
-              with:
-                languages: java
-            - name: packeing the code
-              run: mvn --batch-mode  -Dmaven.test.failure.ignore=true test package
-            - name: perform code quality analyis
-              uses: github/codeql-action/analyze@v4
-            - name: publish test results
-              uses: EnricoMi/publish-unit-test-result-action@v2
-              with:
-                files: "**/target/surefire-reports/**/*.xml"
-                comment_mode: always
+    build:
+        uses: murali96-devops-labs/reusable-workflow-use--it/.github/workflows/demo1.yml@main
+        with:
+            java-version: '17'
+
